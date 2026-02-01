@@ -1,9 +1,15 @@
 
 export const CDN_BASE_URL = 'https://cdn.jsdelivr.net/gh/remo-creator-ai/vibecoding-gallery@main';
 export const ARTIST_NAME = 'skyfishb';
-export const SITE_TITLE = 'skyfishb | 2024 - 2026 Art Collection';
-export const SITE_DESCRIPTION_KO = '디지털 정글 속 색채의 유영. skyfishb는 AI 아트를 통해 야생의 생명력을 화려한 팔레트로 재해석합니다. 2024년 colorful cat 시리즈부터 2026년 신규 jungle cat 시리즈까지, 초현실적인 예술 세계를 탐구합니다.';
-export const SITE_DESCRIPTION_EN = 'A swim through colors in the digital jungle. skyfishb reimagines wild vitality through a vibrant AI-driven palette. From the 2024 colorful cat series to the new 2026 jungle cat works, exploring a surreal artistic universe.';
+export const SITE_TITLE = 'skyfishb | AI Art Archive';
+
+export const HEADER_CONTENT = {
+  line1: "Swim through colors with cats in the digital jungle.",
+  line2: "skyfishb reimagines the vitality of the wild through vivid AI-driven palettes.",
+  series2024: "2024. A Colorful Cat, A Jungle Cat",
+  series2026: "2026. Cat with flower",
+  footer: "Pursuing a surreal world of AI art"
+};
 
 export const COLORS = {
   dark: {

@@ -2,23 +2,11 @@
 import { CDN_BASE_URL } from '../constants';
 import { ImageItem } from '../types';
 
-/**
- * Structural Note for Continuous Uploads:
- * Currently, we probe 1.png, 2.png, etc.
- * PRO: No extra files needed.
- * CON: Slow if you have 1000s of images.
- * 
- * RECOMMENDED UPGRADE: 
- * Create a 'gallery.json' file in your GitHub root:
- * { "images": [{ "id": 1, "year": 2024, "tags": ["cat"] }, ...] }
- * Then fetch that single JSON file instead of multiple HEAD requests.
- */
-
 export const discoverImages = async (): Promise<ImageItem[]> => {
   const availableImages: ImageItem[] = [];
   let consecutiveFailures = 0;
   let currentId = 1;
-  const MAX_SEARCH_LIMIT = 500; // Increased limit for future growth
+  const MAX_SEARCH_LIMIT = 100;
 
   while (consecutiveFailures < 3 && currentId <= MAX_SEARCH_LIMIT) {
     const imageUrl = `${CDN_BASE_URL}/${currentId}.png`;
@@ -27,10 +15,14 @@ export const discoverImages = async (): Promise<ImageItem[]> => {
       const response = await fetch(imageUrl, { method: 'HEAD' });
       
       if (response.ok) {
+        // Based on user request: 1-8 are 2024 Colorful Cat series
+        const is2024 = currentId <= 8;
         availableImages.push({
           id: currentId,
           url: imageUrl,
-          title: `Archive Item #${currentId.toString().padStart(3, '0')}`
+          title: is2024 ? `Colorful Cat #${currentId}` : `Cat with flower #${currentId - 8}`,
+          year: is2024 ? 2024 : 2026,
+          series: is2024 ? "A Colorful Cat" : "Cat with flower"
         });
         consecutiveFailures = 0;
       } else {
@@ -43,8 +35,7 @@ export const discoverImages = async (): Promise<ImageItem[]> => {
     currentId++;
   }
 
-  // Reverse to show newest (highest number) first by default
-  return availableImages.reverse();
+  return availableImages;
 };
 
 export const downloadImage = async (imageUrl: string, imageName: string) => {
@@ -61,12 +52,11 @@ export const downloadImage = async (imageUrl: string, imageName: string) => {
     window.URL.revokeObjectURL(url);
   } catch (error) {
     console.error('Download failed:', error);
-    alert('Failed to download image.');
   }
 };
 
 export const shareOnTwitter = (imageUrl: string) => {
-  const text = encodeURIComponent('Checking out the skyfishb 2024-2026 archive!');
+  const text = encodeURIComponent('Check out this AI art by skyfishb!');
   window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(imageUrl)}&text=${text}`, '_blank');
 };
 

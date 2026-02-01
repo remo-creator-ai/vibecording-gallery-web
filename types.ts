@@ -3,6 +3,8 @@ export interface ImageItem {
   id: number;
   url: string;
   title: string;
+  year: number;
+  series: string;
 }
 
 export enum Theme {
