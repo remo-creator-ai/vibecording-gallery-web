@@ -28,7 +28,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ image, onClose }) => {
     >
       <button 
         onClick={onClose}
-        className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-10"
+        className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
       >
         <X size={32} />
       </button>
@@ -57,10 +57,10 @@ const ImageModal: React.FC<ImageModalProps> = ({ image, onClose }) => {
             </p>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-white/5 space-y-4">
+          <div className="mt-8 pt-8 border-t border-white/5 space-y-6">
             <button
               onClick={() => downloadImage(image.url, image.title)}
-              className="w-full flex items-center justify-center gap-2 py-4 bg-[#5F7FFF] text-white rounded-xl font-bold hover:brightness-110 transition-all"
+              className="w-full flex items-center justify-center gap-2 py-4 bg-[#5F7FFF] text-white rounded-xl font-bold hover:brightness-110 transition-all shadow-lg"
             >
               <Download size={20} />
               Download
@@ -72,7 +72,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ image, onClose }) => {
                 <button
                   onClick={() => shareOnTwitter(image.url)}
                   className="flex-1 flex items-center justify-center py-3 bg-white/5 hover:bg-[#1DA1F2] hover:text-white rounded-xl transition-all"
-                  title="Share on Twitter"
+                  title="Share on X"
                 >
                   <Twitter size={18} />
                 </button>
